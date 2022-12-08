@@ -7,6 +7,7 @@ import {
   FaRegWindowClose,
   FaRegEdit,
 } from "react-icons/fa";
+import SearchBar from "./SearchBar";
 function App() {
   const [contacts, setContacts] = useState<User[]>([]);
   const [createClicked, setCreateClicked] = useState<boolean>(false);
@@ -15,6 +16,7 @@ function App() {
     lastName: "",
     contact: "",
   });
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const editData = (item: User) => {
     setCreateClicked(true);
@@ -24,27 +26,21 @@ function App() {
     setContacts(contacts.filter((item, idx) => idx !== index));
   };
 
+  //
   return (
-    <div className="bg-slate-500 h-screen flex flex-col items-center justify-center gap-5">
-      <div className="flex items-center justify-center gap-3 h-12 w-[400px] border rounded-2xl  bg-white ">
-        <FaSearch className="text-lg" />
-        <input
-          type="text"
-          placeholder="Search Contacts"
-          className="h-8 w-[350px]"
-        />
-      </div>
-      <div className="flex h-12 items-center justify-center gap-3 w-[400px]">
+    <div className=" h-screen flex flex-col items-center gap-5">
+      <h1 className="bg-slate-800 w-full h-[70px] text-white text-4xl font-heading pt-3  pl-10">
+        My Contacts
+      </h1>
+      <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+      <div className="flex h-12 items-center justify-center gap-3 w-[400px] bg-slate-800 cursor-pointer border rounded-full text-white hover:bg-white hover:border-slate-800 hover:text-slate-800 hover:transition-all ease-in-out  ">
         <FaUserPlus className="text-lg" />
-        <h3
-          className="text-xl cursor-pointer"
-          onClick={() => setCreateClicked(true)}
-        >
+        <h3 className="text-xl " onClick={() => setCreateClicked(true)}>
           Create New Contact
         </h3>
       </div>
       {createClicked ? (
-        <div className="bg-transparent fixed h-full w-full flex items-center justify-center">
+        <div className="backdrop-blur-sm fixed h-full w-full flex items-center justify-center">
           <CreateContact
             contacts={contacts}
             updateContacts={setContacts}
@@ -53,26 +49,44 @@ function App() {
           />
         </div>
       ) : null}
-      <div className="flex gap-3 flex-col">
-        {contacts.map((item, index) => (
-          <div className="text-white border rounded-lg w-[300px] h-10 text-center pt-1 flex justify-between p-2">
-            <div>{item.firstName + " " + item.lastName}</div>
-            <div className="flex gap-3">
-              <button
-                className="text-xl content-center"
-                onClick={() => editData(item)}
-              >
-                <FaRegEdit />
-              </button>
-              <button
-                className="text-xl content-center"
-                onClick={() => deleteContact(index)}
-              >
-                <FaRegWindowClose />
-              </button>
+
+      <div className="flex gap-3 flex-col mt-8">
+        {contacts
+          .filter((item, idx) =>
+            searchInput.length > 0 ? item.firstName.match(searchInput) : item
+          )
+          .sort(function (a, b) {
+            const contactA = a.firstName.toUpperCase();
+            const contactB = b.firstName.toUpperCase();
+
+            if (contactA < contactB) {
+              return -1;
+            }
+            if (contactA > contactB) {
+              return 1;
+            }
+
+            return 0;
+          })
+          .map((item, index) => (
+            <div className="text-slate-800 border border-slate-800 w-[300px] h-10 text-center pt-1 flex justify-between p-2">
+              <div className="pl-3 text-slate-800 text-xl">{item.firstName + " " + item.lastName}</div>
+              <div className="flex gap-3">
+                <button
+                  className="text-xl content-center"
+                  onClick={() => editData(item)}
+                >
+                  <FaRegEdit />
+                </button>
+                <button
+                  className="text-xl content-center"
+                  onClick={() => deleteContact(index)}
+                >
+                  <FaRegWindowClose />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.tsx"],
   theme: {
-    extend: {},
+    fontFamily:{
+      heading:["Kanit, sans-serif"]
+    },
+    extend: {
+
+    },
   },
   plugins: [],
 }
