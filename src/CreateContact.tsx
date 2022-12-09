@@ -58,11 +58,11 @@ const CreateContact = ({
     }
   };
   return (
-      <div className="flex flex-col z-10 items-center justify-center gap-10 bg-[#555] h-[430px] w-[500px] border rounded-lg shadow-xl">
+      <div className="flex flex-col z-10 items-center justify-center gap-5 lg:gap-10 bg-[#555] h-[300px] lg:h-[430px] w-[500px] border rounded-lg shadow-xl ">
         <input
           type="text"
           placeholder="First Name"
-          className="h-9 w-[300px] p-4 focus:outline-none"
+          className="h-9 w-[250px] lg:w-[300px] p-4 focus:outline-none"
           value={contact.firstName}
           onChange={(e) =>
             setContact({ ...contact, firstName: e.target.value })
@@ -71,23 +71,23 @@ const CreateContact = ({
         <input
           type="text"
           placeholder="Last Name"
-          className="h-9 w-[300px] p-4 focus:outline-none"
+          className="h-9 w-[250px] lg:w-[300px] p-4 focus:outline-none"
           value={contact.lastName}
           onChange={(e) => setContact({ ...contact, lastName: e.target.value })}
         />
         <input
           type="text"
           placeholder="Contact Number"
-          className="h-9 w-[300px] p-4 focus:outline-none"
+          className="h-9 w-[250px] lg:w-[300px] p-4 focus:outline-none"
           style={{ border: error ? "3px solid red" : "" }}
           value={contact.contact}
           onChange={(e) => setContact({ ...contact, contact: e.target.value })}
         />
-        <div className="flex justify-between w-[300px]">
-          <button className="bg-white w-[90px] h-7 " onClick={saveContacts}>
+        <div className="flex justify-between w-[250px] lg:w-[300px] ">
+          <button className="bg-white w-[90px] h-7 mr-4" onClick={saveContacts}>
             Save
           </button>
-          <button className="bg-white w-[90px] h-7 " onClick={resetModal}>
+          <button className="bg-white w-[90px] h-7 mr-4 " onClick={resetModal}>
             Reset
           </button>
           <button

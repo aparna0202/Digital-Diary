@@ -11,12 +11,12 @@ const SearchBar = ({ searchInput, setSearchInput }: Props) => {
     }
   };
   return (
-    <div className="flex items-center pl-5 gap-3 h-12 w-[600px] border rounded-2xl  border-slate-800 bg-white ">
-      <FaSearch className="text-lg" />
+    <div className="flex items-center pl-5 gap-3 h-8 lg:h-12 w-[300px] lg:w-[600px] border rounded-2xl  border-slate-800 bg-white ">
+      <FaSearch className=" text-sm lg:text-lg" />
       <input
         type="text"
         placeholder="Search Contacts"
-        className="h-8 w-[350px] focus:outline-none"
+        className="lg:h-8 h-7 lg:w-[350px] w-[200px] focus:outline-none"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
         onKeyDown={(e) => handleEnterClicked(e)}

@@ -29,18 +29,18 @@ function App() {
   //
   return (
     <div className=" h-screen flex flex-col items-center gap-5">
-      <h1 className="bg-slate-800 w-full h-[70px] text-white text-4xl font-heading pt-3  pl-10">
+      <h1 className="bg-slate-800 w-full h-[70px] text-white text-3xl lg:text-4xl font-heading pt-3  pl-10">
         My Contacts
       </h1>
       <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
-      <div className="flex h-12 items-center justify-center gap-3 w-[400px] bg-slate-800 cursor-pointer border rounded-full text-white hover:bg-white hover:border-slate-800 hover:text-slate-800 hover:transition-all ease-in-out  ">
-        <FaUserPlus className="text-lg" />
-        <h3 className="text-xl " onClick={() => setCreateClicked(true)}>
+      <div className="flex h-10 lg:h-12 items-center justify-center gap-3 w-[200px] lg:w-[400px] bg-slate-800 cursor-pointer border rounded-full text-white hover:bg-white hover:border-slate-800 hover:text-slate-800 hover:transition-all ease-in-out  ">
+        <FaUserPlus className="text-sm lg:text-lg" />
+        <h3 className="text-sm lg:text-xl " onClick={() => setCreateClicked(true)}>
           Create New Contact
         </h3>
       </div>
       {createClicked ? (
-        <div className="backdrop-blur-sm fixed h-full w-full flex items-center justify-center">
+        <div className="backdrop-blur-sm fixed h-full w-full flex items-center justify-center px-10 ">
           <CreateContact
             contacts={contacts}
             updateContacts={setContacts}
